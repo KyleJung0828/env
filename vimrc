@@ -40,11 +40,9 @@ set laststatus=4   "Always display status
 "" The width and height of the vim window
 "set co=84 " The width of the vim window
 "set lines=50 " The height of the vim window
-
-
 set mps+=<:> " Add the pair for < >
-set mps+={:} " 
-set paste  "Remove staircase phenomenon
+set mps+={:}  
+set nopaste "To enable syntax assistance
 set scrolloff=2
 set expandtab " Input blank space instead of tab
 set smarttab
@@ -64,7 +62,7 @@ set ignorecase " case-insensitive search
 set smartcase "smart case search - need <set ignore> to work properly
 
 " listchars
-" set list
+"set list listchars=trailtab:»·,trail:·
 
 " set statusline=\ %<%l:%v\ [%P]%=%a\ %h%m%r\ %F\
 
@@ -114,7 +112,7 @@ map 99 :w<CR>'I
 map `` :e#<CR>
 
 " Shortcut
-map <c-a> :w<CR>
+" map <c-a> :w<CR>
 
 map <C-H> <C-W>h
 map <C-J> <C-W>j
@@ -176,13 +174,13 @@ set clipboard=unnamedplus
 
 " CtrlP File Optimization
 let g:ctrlp_custom_ignore = {
-\ 'dir':  '\.git$\|public$\|log$\|tmp$\|vendor$',
-\ 'file': '\v\.(exe|so|dll|o|png)$'
+\ 'dir':  '\.git$\|public$\|log$\|tmp$\|vendor$\|bin$\|build$\|resource$',
+\ 'file': '\v\.(exe|so|dll|o|png|)$'
 \ }
 
 let g:ctrlp_working_path_mode = 'r'
-let g:ctrlp_max_files = 1000000
-let g:ctrlp_max_depth = 1000
+let g:ctrlp_max_files = 10000000
+let g:ctrlp_max_depth = 10000
  
 "You Complete Me configuration
 set encoding=utf-8
