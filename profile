@@ -20,8 +20,8 @@ if [ -f "$HOME/.bashrc" ]; then
     source "$HOME/.bashrc"
 fi
 
-if [ -f "$HOME/env/tmux.conf" ]; then
-    tmux source-file "$HOME/env/tmux.conf"
+if [ -f "$HOME/kyle/env/tmux.conf" ]; then
+    tmux source-file "$HOME/kyle/env/tmux.conf"
 fi
 
 # set PATH so it includes user's private bin directories
@@ -31,5 +31,6 @@ if [ -f /home/kwanghyun/office/build/ccache/ccache.profile ]; then
   source /home/kwanghyun/office/build/ccache/ccache.profile
 fi
 
-export CCACHE_PREFIX="icecc"
+# export CCACHE_PREFIX="icecc"
+export PATH=$PATH:$HOME/office/script
 export PATH=$PATH:$HOME/office/script

@@ -117,7 +117,8 @@ if ! shopt -oq posix; then
 fi
 
 
-alias nin="sudo service iceccd restart && cd ~/office/build/debug && ninja -j24 -k50 && cd - && cd ~/office/bin && cp ~/office/build/debug/compile_commands.json ~/office/src && cd - && sudo service iceccd stop"
+# alias nin="sudo service iceccd restart && cd ~/office/build/debug && ninja -j24 -k50 && cd - && cd ~/office/bin && cp ~/office/build/debug/compile_commands.json ~/office/src && cd - && sudo service iceccd stop"
+alias nin="cd ~/office/build/debug && ninja -j24 -k50 && cd - && cd ~/office/bin && cp ~/office/build/debug/compile_commands.json ~/office/src && cd - "
 alias rc="cd ~/office/bin && ./ToCell ../../test/ToCell_test1.xlsx && cd -"
 alias rp="cd ~/office/bin && ./ToPoint ../../test/PPTTest.pptx && cd -"
 alias rw="cd ~/office/bin && ./ToWord ../../test/WordTest.docx && cd -"
