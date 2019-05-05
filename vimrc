@@ -1,28 +1,3 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-""" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-"Plugin 'VundleVim/Vundle.vim'
-
-" Additional Pluggins
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Bundle 'edkolev/tmuxline.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'bfrg/vim-cpp-modern'
-
-call vundle#end()            " required
-filetype plugin indent on    " required
-
 set nu " Display line number
 set autoindent " Indent automatically
 set cindent " Auto-indent for C programming
@@ -159,11 +134,6 @@ function! LoadCscope()
 endfunction
 au BufEnter /* call LoadCscope()
 
- " Use Pathogen plugins
-execute pathogen#infect()
-syntax on
-filetype plugin indent on
-
 " Copy to Clipboard"
 set clipboard=unnamedplus
 
@@ -182,30 +152,6 @@ set laststatus=2
 let g:airline#extensions#powerline#enabled = 1
 let g:airline_theme='base16'
 
-" Set the color of the highlight 
-highlight Comment term=bold cterm=bold ctermfg=Red
-hi Search ctermbg=DarkGray cterm=bold ctermfg=Yellow
-hi Visual ctermbg=LightGreen cterm=bold ctermfg=DarkBlue guifg=Yellow guibg=#FFFFFF
-
-" Syntax coloring
-" colorscheme jellybeans
-colorscheme monokai
-:hi Normal ctermbg=16 ctermfg=253
-:hi StorageClass ctermfg=197 
-:hi Function ctermfg=154 
-:hi cCustomClass ctermfg=31 
-:hi cppSTLnamespace ctermfg=123 
-:hi Boolean ctermfg=197 
-
-" cpp enhanced highlight
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 0
-let g:cpp_class_decl_highlight = 1
-let g:cpp_experimental_simple_template_highlight = 1
-let g:cpp_experimental_template_highlight = 1
-let g:cpp_concepts_highlight = 1
-
-
  " tagbar configuration
 map <C-O> :Tagbar<CR>
  " nerdtree configuration
@@ -217,15 +163,3 @@ let g:lightline = {
       \ 'left' : [ [ 'mode', 'paste' ], [ 'readonly', 'absolutepath', 'modified' ] ],
       \ }
       \ }
- "You Complete Me configuration
-set encoding=utf-8
-highlight YcmErrorLine ctermbg=LightBlue ctermfg=DarkGray cterm=bold guibg=#3f0000
-let g:ycm_error_symbol = '!!'
-let g:ycm_warning_symbol = '>>'
-let g:ycm_max_num_candidates = 1
-map <C-F> :YcmCompleter FixIt<CR>
-map <C-V> :YcmCompleter GoTo<CR>
-
-if isdirectory('/usr/lib/python3.7/config-3.7m-x86_64-linux-gnu/')
-    set path+=/usr/lib/python3.7/config-3.7m-x86_64-linux-gnu/
-endif
