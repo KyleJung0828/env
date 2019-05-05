@@ -120,6 +120,7 @@ install_monokai() {
         echo "colorscheme monokai" >> ~/.vimrc
         echo '" Syntax coloring' >> ~/.vimrc
         echo ':hi Normal ctermbg=0 ctermfg=253' >> ~/.vimrc
+        echo ':hi NonText ctermbg=0 ctermfg=253' >> ~/.vimrc
         echo ':hi StorageClass ctermfg=197' >> ~/.vimrc 
         echo ':hi Function ctermfg=154' >> ~/.vimrc
         echo ':hi cCustomClass ctermfg=31' >> ~/.vimrc
@@ -176,6 +177,11 @@ install_all() {
 
 ##### Main Start
 echo -e "${COLOR_YELLOW} Install pathogen vim package ${COLOR_NONE}"
+
+read -p "Do you want to apply env/vimrc? (y/n)" prompt
+if [ $PROMPT == "y"]; then
+    cp ../vimrc ~/.vimrc
+fi
 
 if [ -e ~/.vim/autoload/pathogen.vim ]; then
   echo -e "${COLOR_RED} Already pathogen installed. ${COLOR_NONE}"
