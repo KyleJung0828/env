@@ -107,13 +107,10 @@ install_light_line() {
 
 }
 
-
 promptMonokaiSettingsToVimrc()
 {
     read -p "Do you want to add colorscheme settings to vimrc? (y/n)" prompt
     if [ "$prompt" = "y" ]; then
-        echo "Moving vim-monokai colors file to ~/.vim/colors."
-        cp ../vim-monokai/monokai.vim ~/.vim/colors/monokai.vim
         echo ' ' >> ~/.vimrc
         echo "colorscheme monokai" >> ~/.vimrc
         echo '" Syntax coloring' >> ~/.vimrc
@@ -150,6 +147,11 @@ install_monokai() {
 
     if [ -f ~/.vim/colors/monokai.vim ]; then
         echo "colorscheme already installed"
+    else
+        echo "git cloning vim-monokai project"
+        git clone --recursive https://github.com/sickill/vim-monokai.git
+        echo "Copying vim-monokai colors file to ~/.vim/colors."
+        cp vim-monokai/colors/monokai.vim ~/.vim/colors/monokai.vim
     fi
 
     promptMonokaiSettingsToVimrc
