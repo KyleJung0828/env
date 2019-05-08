@@ -61,7 +61,7 @@ install_multiple_cursors() {
 
 promptYCMCustomizationsToVimrc() {
   read -p "Do you want to add YCM customizations to your vimrc? (y/n) " prompt
-  if [ $prompt == "y" ]; then
+  if [ "$prompt" == "y" ]; then
       echo " \"You Complete Me configuration" >> ~/.vimrc
       echo "set encoding=utf-8" >> ~/.vimrc
       echo "highlight YcmErrorLine ctermbg=LightBlue ctermfg=DarkGray cterm=bold guibg=#3f0000" >> ~/.vimrc
@@ -77,13 +77,17 @@ promptYCMCustomizationsToVimrc() {
 }
 
 install_you_complete_me() {
-  sudo apt-get install build-essential cmake python3-dev \
-    && echo "start install you_complete_me" \
-    || { echo -e "${COLOR_RED} You need to install 'build-essential', 'cmake', 'python3-dev' before install you_complete_me ${COLOR_NONE}" ; }
-  git clone --recursive https://github.com/Valloric/YouCompleteMe.git ~/.vim/bundle/YouCompleteMe
-  cd ~/.vim/bundle/YouCompleteMe
-  python3 install.py --clang-completer
-  promptYCMCustomizationsToVimrc
+    if [ -e ~/.vim/bundle/YouCompleteMe ]; then
+        echo "YouCompleteMe already installed" 
+    else
+        sudo apt-get install build-essential cmake python3-dev \
+            && echo "start install you_complete_me" \
+            || { echo -e "${COLOR_RED} You need to install 'build-essential', 'cmake', 'python3-dev' before install you_complete_me ${COLOR_NONE}" ; }
+    git clone --recursive https://github.com/Valloric/YouCompleteMe.git ~/.vim/bundle/YouCompleteMe
+        cd ~/.vim/bundle/YouCompleteMe
+        python3 install.py --clang-completer
+    fi
+    promptYCMCustomizationsToVimrc
 }
 
 install_fugitive() {
@@ -103,17 +107,11 @@ install_light_line() {
 
 }
 
-install_monokai() {
-    
-    if [ -e ~/.vim/colors ]; then
-        echo "~/.vimrc/colors directory exists."
-    else
-        mkdir ~/.vim/colors
-    fi
 
-    if [ -f ~/.vim/colors/monokai.vim ]; then
-        echo "colorscheme already added to vimrc"
-    else
+promptMonokaiSettingsToVimrc()
+{
+    read -p "Do you want to add colorscheme settings to vimrc? (y/n)" prompt
+    if [ "$prompt" = "y" ]; then
         echo "Moving vim-monokai colors file to ~/.vim/colors."
         cp ../vim-monokai/monokai.vim ~/.vim/colors/monokai.vim
         echo ' ' >> ~/.vimrc
@@ -140,6 +138,21 @@ install_monokai() {
         echo 'let g:cpp_concepts_highlight = 1' >> ~/.vimrc
         echo "colorscheme added to vimrc"
     fi
+}
+
+install_monokai() {
+    
+    if [ -e ~/.vim/colors ]; then
+        echo "~/.vimrc/colors directory exists."
+    else
+        mkdir ~/.vim/colors
+    fi
+
+    if [ -f ~/.vim/colors/monokai.vim ]; then
+        echo "colorscheme already installed"
+    fi
+
+    promptMonokaiSettingsToVimrc
 }
 
 install_auto_pairs(){
@@ -176,23 +189,23 @@ install_all() {
 
 
 ##### Main Start
-echo -e "${COLOR_YELLOW} Install pathogen vim package ${COLOR_NONE}"
 
-read -p "Do you want to apply env/vimrc? (y/n)" prompt
-if [ $PROMPT == "y"]; then
+read -p "Do you want to apply a basic vimrc? (y/n)" prompt
+if [ "$PROMPT" = "y" ]; then
     cp ../vimrc ~/.vimrc
 fi
 
 if [ -e ~/.vim/autoload/pathogen.vim ]; then
-  echo -e "${COLOR_RED} Already pathogen installed. ${COLOR_NONE}"
+    echo -e "${COLOR_RED} Already pathogen installed. ${COLOR_NONE}"
 else
-  mkdir -p ~/.vim ~/.vim/autoload ~/.vim/bundle && \
-  curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+    echo -e "${COLOR_YELLOW} Install pathogen vim package ${COLOR_NONE}"
+    mkdir -p ~/.vim ~/.vim/autoload ~/.vim/bundle && \
+    curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
-  echo " \" Use Pathogen plugins" >> ~/.vimrc
-  echo "execute pathogen#infect()" >> ~/.vimrc
-  echo "syntax on" >> ~/.vimrc
-  echo "filetype plugin indent on" >> ~/.vimrc
+    echo " \" Use Pathogen plugins" >> ~/.vimrc
+    echo "execute pathogen#infect()" >> ~/.vimrc
+    echo "syntax on" >> ~/.vimrc
+    echo "filetype plugin indent on" >> ~/.vimrc
 fi
 
 
