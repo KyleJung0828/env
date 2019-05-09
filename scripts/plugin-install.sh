@@ -192,9 +192,10 @@ install_all() {
 
 ##### Main Start
 
-read -p "Do you want to apply a basic vimrc? (y/n)" prompt
+read -p "Do you want to pre-process? (basic vimrc jobs like Vundle) (y/n)" prompt
 if [ "$PROMPT" = "y" ]; then
     cp ../vimrc ~/.vimrc
+    install_vundle
 fi
 
 if [ -e ~/.vim/autoload/pathogen.vim ]; then
