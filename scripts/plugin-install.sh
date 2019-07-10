@@ -194,6 +194,7 @@ install_all() {
 
 read -p "Do you want to pre-process? (basic vimrc jobs like Vundle) (y/n)" prompt
 if [ "$PROMPT" = "y" ]; then
+    echo "Copying vimrc..."
     cp ../vimrc ~/.vimrc
     install_vundle
 fi

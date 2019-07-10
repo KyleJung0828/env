@@ -1,7 +1,19 @@
 #!/bin/bash
 
-echo "Copying vimrc..."
-cp ../vimrc ~/.vimrc
+rm -rf backup
+
+mkdir backup
+mv ~/.vimrc backup/vimrc.bak
+
+rm -rf ~/.vimrc
+rm -rf ~/.vim
+rm -rf vim-monokai
+
+echo "Copying profile..."
+cp ../profile ~/.profile
+
+echo "Copying bashrc..."
+cp ../bashrc_debian ~/.bashrc
 
 echo "Sourcing tmux.conf..."
 tmux source-file ../tmux.conf
