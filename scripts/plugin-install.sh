@@ -107,34 +107,31 @@ install_light_line() {
 
 }
 
-promptMonokaiSettingsToVimrc()
+applyMonokaiSettingsToVimrc()
 {
-    read -p "Do you want to add colorscheme settings to vimrc? (y/n)" prompt
-    if [ "$prompt" = "y" ]; then
-        echo ' ' >> ~/.vimrc
-        echo "colorscheme monokai" >> ~/.vimrc
-        echo '" Syntax coloring' >> ~/.vimrc
-        echo ':hi Normal ctermbg=0 ctermfg=253' >> ~/.vimrc
-        echo ':hi NonText ctermbg=0 ctermfg=253' >> ~/.vimrc
-        echo ':hi StorageClass ctermfg=197' >> ~/.vimrc 
-        echo ':hi Function ctermfg=154' >> ~/.vimrc
-        echo ':hi cCustomClass ctermfg=31' >> ~/.vimrc
-        echo ':hi cppSTLnamespace ctermfg=123' >> ~/.vimrc
-        echo ':hi Boolean ctermfg=197' >> ~/.vimrc
-        echo ' ' >> ~/.vimrc
-        echo '"Set the color of the highlight"' >> ~/.vimrc
-        echo 'hi Search ctermbg=DarkGray cterm=bold ctermfg=Yellow' >> ~/.vimrc
-        echo 'hi Visual ctermbg=LightGreen cterm=bold ctermfg=DarkBlue guifg=Yellow guibg=#FFFFFF' >> ~/.vimrc
-        echo ' ' >> ~/.vimrc
-        echo '" cpp enhanced highlight' >> ~/.vimrc
-        echo 'let g:cpp_class_scope_highlight = 1' >> ~/.vimrc
-        echo 'let g:cpp_member_variable_highlight = 0' >> ~/.vimrc
-        echo 'let g:cpp_class_decl_highlight = 1' >> ~/.vimrc
-        echo 'let g:cpp_experimental_simple_template_highlight = 1' >> ~/.vimrc
-        echo 'let g:cpp_experimental_template_highlight = 1' >> ~/.vimrc
-        echo 'let g:cpp_concepts_highlight = 1' >> ~/.vimrc
-        echo "colorscheme added to vimrc"
-    fi
+    echo ' ' >> ~/.vimrc
+    echo "colorscheme monokai" >> ~/.vimrc
+    echo '" Syntax coloring' >> ~/.vimrc
+    echo ':hi Normal ctermbg=0 ctermfg=253' >> ~/.vimrc
+    echo ':hi NonText ctermbg=0 ctermfg=253' >> ~/.vimrc
+    echo ':hi StorageClass ctermfg=197' >> ~/.vimrc 
+    echo ':hi Function ctermfg=154' >> ~/.vimrc
+    echo ':hi cCustomClass ctermfg=31' >> ~/.vimrc
+    echo ':hi cppSTLnamespace ctermfg=123' >> ~/.vimrc
+    echo ':hi Boolean ctermfg=197' >> ~/.vimrc
+    echo ' ' >> ~/.vimrc
+    echo '"Set the color of the highlight"' >> ~/.vimrc
+    echo 'hi Search ctermbg=DarkGray cterm=bold ctermfg=Yellow' >> ~/.vimrc
+    echo 'hi Visual ctermbg=LightGreen cterm=bold ctermfg=DarkBlue guifg=Yellow guibg=#FFFFFF' >> ~/.vimrc
+    echo ' ' >> ~/.vimrc
+    echo '" cpp enhanced highlight' >> ~/.vimrc
+    echo 'let g:cpp_class_scope_highlight = 1' >> ~/.vimrc
+    echo 'let g:cpp_member_variable_highlight = 0' >> ~/.vimrc
+    echo 'let g:cpp_class_decl_highlight = 1' >> ~/.vimrc
+    echo 'let g:cpp_experimental_simple_template_highlight = 1' >> ~/.vimrc
+    echo 'let g:cpp_experimental_template_highlight = 1' >> ~/.vimrc
+    echo 'let g:cpp_concepts_highlight = 1' >> ~/.vimrc
+    echo "colorscheme added to vimrc"
 }
 
 install_monokai() {
@@ -154,7 +151,7 @@ install_monokai() {
         cp vim-monokai/colors/monokai.vim ~/.vim/colors/monokai.vim
     fi
 
-    promptMonokaiSettingsToVimrc
+    applyMonokaiSettingsToVimrc
 }
 
 install_auto_pairs(){
@@ -192,10 +189,15 @@ install_all() {
 
 ##### Main Start
 
-read -p "Do you want to pre-process? (basic vimrc jobs like Vundle) (y/n)" prompt
-if [ "$PROMPT" = "y" ]; then
-    echo "Copying vimrc..."
+if [ -e ~/.vimrc ]; then
+    echo -e  "vimrc already copied."
+else
     cp ../vimrc ~/.vimrc
+fi
+
+if [ -e ~/.vim/bundle ]; then
+    echo -e "vundle already installed"
+else
     install_vundle
 fi
 
