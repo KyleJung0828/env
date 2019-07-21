@@ -6,6 +6,8 @@ mkdir backup
 mv ~/.vimrc backup/vimrc.bak
 
 rm -rf ~/.vimrc
+cp ../vimrc ~/.vimrc
+
 rm -rf ~/.vim
 rm -rf vim-monokai
 

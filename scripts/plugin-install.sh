@@ -44,9 +44,9 @@ install_vundle() {
         echo "Plugin 'bfrg/vim-cpp-modern'" >> ~/.vimrc
         echo 'call vundle#end()            " required' >> ~/.vimrc
         echo 'filetype plugin indent on    " required' >> ~/.vimrc
+        
+        vim +PluginInstall +qall
     fi
-
-    vim +PluginInstall +qall
 }
 
 install_tagbar() {
@@ -188,18 +188,6 @@ install_all() {
 
 
 ##### Main Start
-
-if [ -e ~/.vimrc ]; then
-    echo -e  "vimrc already copied."
-else
-    cp ../vimrc ~/.vimrc
-fi
-
-if [ -e ~/.vim/bundle ]; then
-    echo -e "vundle already installed"
-else
-    install_vundle
-fi
 
 if [ -e ~/.vim/autoload/pathogen.vim ]; then
     echo -e "${COLOR_RED} Already pathogen installed. ${COLOR_NONE}"
