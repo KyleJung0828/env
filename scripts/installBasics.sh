@@ -6,19 +6,23 @@ mkdir backup
 mv ~/.vimrc backup/vimrc.bak
 
 rm -rf ~/.vimrc
-cp ../vimrc ~/.vimrc
+cp ../files/vimrc ~/.vimrc
+
+cp ../files/gdbinit ~/.gdbinit
 
 rm -rf ~/.vim
 rm -rf vim-monokai
 
 echo "Copying profile..."
-cp ../profile ~/.profile
+cp ../files/profile ~/.profile
+source ~/.profile
 
 echo "Copying bashrc..."
-cp ../bashrc_debian ~/.bashrc
+cp ../files/bashrc_debian ~/.bashrc
+source ~/.bashrc
 
 echo "Sourcing tmux.conf..."
-tmux source-file ../tmux.conf
+tmux source-file ../files/tmux.conf
 
 echo "Installing vundle..."
 ./plugin-install.sh vundle

@@ -32,12 +32,12 @@ forceSudo()
 
 forceSudo
 
+promptUserName
+
 if grep -q ${USER} /etc/samba/smb.conf; then
     echo -e "Samba seems to be installed already. Check again."
     exit 0;
 fi
-
-promptUserName
 
 sudo apt-get update
 
