@@ -39,7 +39,6 @@ install_vundle() {
         echo "Bundle 'edkolev/tmuxline.vim'" >> ~/.vimrc
         echo "Plugin 'scrooloose/nerdtree'" >> ~/.vimrc
         echo "Plugin 'ctrlpvim/ctrlp.vim'" >> ~/.vimrc
-        echo "Plugin 'airblade/vim-gitgutter'" >> ~/.vimrc
         echo "Plugin 'octol/vim-cpp-enhanced-highlight'" >> ~/.vimrc
         echo "Plugin 'bfrg/vim-cpp-modern'" >> ~/.vimrc
         echo 'call vundle#end()            " required' >> ~/.vimrc
@@ -111,6 +110,7 @@ applyMonokaiSettingsToVimrc()
 {
     echo ' ' >> ~/.vimrc
     echo "colorscheme monokai" >> ~/.vimrc
+    echo ' ' >> ~/.vimrc
     echo '" Syntax coloring' >> ~/.vimrc
     echo ':hi Normal ctermbg=0 ctermfg=253' >> ~/.vimrc
     echo ':hi NonText ctermbg=0 ctermfg=253' >> ~/.vimrc
@@ -131,25 +131,34 @@ applyMonokaiSettingsToVimrc()
     echo 'let g:cpp_experimental_simple_template_highlight = 1' >> ~/.vimrc
     echo 'let g:cpp_experimental_template_highlight = 1' >> ~/.vimrc
     echo 'let g:cpp_concepts_highlight = 1' >> ~/.vimrc
+    echo ' ' >> ~/.vimrc
+    echo '" Make it red, when the line goes over 80' >> ~/.vimrc
+    echo 'highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9' >> ~/.vimrc
+    echo '' >> ~/.vimrc
     echo "colorscheme added to vimrc"
 }
 
-install_monokai() {
-    
-    if [ -e ~/.vim/colors ]; then
-        echo "~/.vimrc/colors directory exists."
-    else
+install_monokai() 
+{
+    cd $HOME/env/scripts/
+
+    if [ ! -e ~/.vim/colors ]; then
         mkdir ~/.vim/colors
     fi
 
     if [ -f ~/.vim/colors/monokai.vim ]; then
-        echo "colorscheme already installed"
-    else
-        echo "git cloning vim-monokai project"
-        git clone --recursive https://github.com/sickill/vim-monokai.git
-        echo "Copying vim-monokai colors file to ~/.vim/colors."
-        cp vim-monokai/colors/monokai.vim ~/.vim/colors/monokai.vim
+        echo "Monokai is already installed. Reinstalling..."
+        sudo rm -rf ~/.vim/colors/monokai.vim
     fi
+
+    if [ -e vim-monokai ]; then
+        sudo rm -rf vim-monokai
+    fi
+
+    echo "git cloning vim-monokai project"
+    git clone --recursive https://github.com/sickill/vim-monokai.git vim-monokai
+    echo "Copying vim-monokai colors file to ~/.vim/colors."
+    cp vim-monokai/colors/monokai.vim ~/.vim/colors/monokai.vim
 
     applyMonokaiSettingsToVimrc
 }
@@ -188,20 +197,6 @@ install_all() {
 
 
 ##### Main Start
-
-if [ -e ~/.vim/autoload/pathogen.vim ]; then
-    echo -e "${COLOR_RED} Already pathogen installed. ${COLOR_NONE}"
-else
-    echo -e "${COLOR_YELLOW} Install pathogen vim package ${COLOR_NONE}"
-    mkdir -p ~/.vim ~/.vim/autoload ~/.vim/bundle && \
-    curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-
-    echo " \" Use Pathogen plugins" >> ~/.vimrc
-    echo "execute pathogen#infect()" >> ~/.vimrc
-    echo "syntax on" >> ~/.vimrc
-    echo "filetype plugin indent on" >> ~/.vimrc
-fi
-
 
 if [ "$1" = "all" ] || [ "$1" = "All" ] ; then
   echo -e "${COLOR_GREEN} Install all plugins ... ${COLOR_NONE}"

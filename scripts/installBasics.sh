@@ -10,7 +10,7 @@ cp ../files/vimrc ~/.vimrc
 
 cp ../files/gdbinit ~/.gdbinit
 
-rm -rf ~/.vim
+rm -rf ~/.vim/colors
 rm -rf vim-monokai
 
 echo "Copying profile..."
@@ -29,5 +29,8 @@ echo "Installing vundle..."
 
 echo "Installing monokai..."
 ./plugin-install.sh monokai
+
+echo "Installing ycm..."
+./plugin-install.sh ycm
 
 echo "Done!"

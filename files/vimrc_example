@@ -39,6 +39,10 @@ set smartcase "smart case search - need <set ignore> to work properly
 
 " set statusline=\ %<%l:%v\ [%P]%=%a\ %h%m%r\ %F\
 
+"" Make it red, when the line goes over 80
+highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
+match OverLength /\%81v.\+/
+
 "Locate the cursor at the place exited last
 au BufReadPost *
 \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -142,7 +146,7 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_working_path_mode = 'r'
 let g:ctrlp_max_files = 10000000
 let g:ctrlp_max_depth = 10000
-let g:ctrlp_regexp = 0 " regex mode on by default
+let g:ctrlp_regexp = 1 " regex mode on by default.
  
 " vim airline
 set laststatus=2
@@ -160,3 +164,50 @@ let g:lightline = {
       \ 'left' : [ [ 'mode', 'paste' ], [ 'readonly', 'absolutepath', 'modified' ] ],
       \ }
       \ }
+ 
+set nocompatible              " be iMproved, required
+filetype off                  " required
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Bundle 'edkolev/tmuxline.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'bfrg/vim-cpp-modern'
+call vundle#end()            " required
+filetype plugin indent on    " required
+ 
+colorscheme monokai
+" Syntax coloring
+:hi Normal ctermbg=0 ctermfg=253
+:hi NonText ctermbg=0 ctermfg=253
+:hi StorageClass ctermfg=197
+:hi Function ctermfg=154
+:hi cCustomClass ctermfg=31
+:hi cppSTLnamespace ctermfg=123
+:hi Boolean ctermfg=197
+ 
+"Set the color of the highlight"
+hi Search ctermbg=DarkGray cterm=bold ctermfg=Yellow
+hi Visual ctermbg=LightGreen cterm=bold ctermfg=DarkBlue guifg=Yellow guibg=#FFFFFF
+ 
+" cpp enhanced highlight
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 0
+let g:cpp_class_decl_highlight = 1
+let g:cpp_experimental_simple_template_highlight = 1
+let g:cpp_experimental_template_highlight = 1
+let g:cpp_concepts_highlight = 1
+ "You Complete Me configuration
+set encoding=utf-8
+highlight YcmErrorLine ctermbg=LightBlue ctermfg=DarkGray cterm=bold guibg=#3f0000
+let g:ycm_error_symbol = '!!'
+let g:ycm_warning_symbol = '>>'
+let g:ycm_max_num_candidates = 1
+map <C-F> :YcmCompleter FixIt<CR>
+map <C-V> :YcmCompleter GoTo<CR>
