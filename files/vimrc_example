@@ -39,10 +39,6 @@ set smartcase "smart case search - need <set ignore> to work properly
 
 " set statusline=\ %<%l:%v\ [%P]%=%a\ %h%m%r\ %F\
 
-"" Make it red, when the line goes over 80
-highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
-match OverLength /\%81v.\+/
-
 "Locate the cursor at the place exited last
 au BufReadPost *
 \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -203,6 +199,11 @@ let g:cpp_class_decl_highlight = 1
 let g:cpp_experimental_simple_template_highlight = 1
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_concepts_highlight = 1
+
+"" Make it red, when the line goes over 80
+highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
+match OverLength /\%81v.\+/
+
  "You Complete Me configuration
 set encoding=utf-8
 highlight YcmErrorLine ctermbg=LightBlue ctermfg=DarkGray cterm=bold guibg=#3f0000
