@@ -20,8 +20,8 @@ if [ -f "$HOME/.bashrc" ]; then
     source "$HOME/.bashrc"
 fi
 
-if [ -f "$HOME/env/tmux.conf" ]; then
-    tmux source-file "$HOME/env/tmux.conf"
+if [ -f "$HOME/env/files/tmux.conf" ]; then
+    tmux source-file "$HOME/env/files/tmux.conf"
 fi
 
 # set PATH so it includes user's private bin directories
