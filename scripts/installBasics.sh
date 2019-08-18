@@ -17,9 +17,9 @@ echo "Copying profile..."
 cp ../files/profile ~/.profile
 source ~/.profile
 
-echo "Copying bashrc..."
-cp ../files/bashrc_debian ~/.bashrc
-source ~/.bashrc
+#echo "Copying bashrc..."
+#cp ../files/bashrc_debian ~/.bashrc
+#source ~/.bashrc
 
 echo "Sourcing tmux.conf..."
 tmux source-file ../files/tmux.conf
@@ -30,7 +30,7 @@ echo "Installing vundle..."
 echo "Installing monokai..."
 ./plugin-install.sh monokai
 
-echo "Installing ycm..."
-./plugin-install.sh ycm
+#echo "Installing ycm..."
+#./plugin-install.sh ycm
 
 echo "Done!"
