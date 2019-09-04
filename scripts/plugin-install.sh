@@ -160,6 +160,8 @@ install_monokai()
     echo "Copying vim-monokai colors file to ~/.vim/colors."
     cp vim-monokai/colors/monokai.vim ~/.vim/colors/monokai.vim
 
+    rm -rf vim-monokai
+
     applyMonokaiSettingsToVimrc
 }
 
