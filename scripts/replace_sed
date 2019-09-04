@@ -1,0 +1,23 @@
+#!/bin/bash
+if [ ${1} == "-recover" ]; then
+  echo "recovery mode"
+  if [ -e {*.replace.bak} ]; then
+    echo No file exists to replace.
+    exit 0
+  fi
+  echo "Not Implemented Yet."
+  for file in $(find -name *.replace.bak)
+  do 
+        truefilename=${file%.*.*}
+        cp $file $truefilename
+        rm $file
+  done
+  exit 0
+fi
+
+echo Converting $1 to $2... 
+for file in $(grep -lr "$1" *)
+do
+    sed -i.replace.bak s/$1/$2/g $file
+    echo $file is converted.
+done

@@ -1,0 +1,2 @@
+echo 'export PATH=$PATH:$HOME/office/script' >> ~/.profile
+source ~/.profile
