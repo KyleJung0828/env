@@ -1,4 +1,14 @@
 #!/bin/bash
+
+echo "You are trying to replace"
+echo "From: ${1}"
+echo "To: ${2}"
+read -p "Are you sure? <y/n>" prompt
+if [ ${prompt} != y ]; then
+    echo "Please retry"
+    exit 0
+fi
+
 if [ ${1} == "-recover" ]; then
   echo "recovery mode"
   if [ -e {*.replace.bak} ]; then
@@ -6,11 +16,14 @@ if [ ${1} == "-recover" ]; then
     exit 0
   fi
   echo "Not Implemented Yet."
-  for file in $(find -name *.replace.bak)
+  for file in $(find . -name "*.replace.bak")
   do 
+        testtruefile=${testfile%.*.*}
+        echo "testtruefile becomes $testtruefile"
         truefilename=${file%.*.*}
         cp $file $truefilename
         rm $file
+        echo "${file} has been recovered!"
   done
   exit 0
 fi
