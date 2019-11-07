@@ -1,33 +1,64 @@
 #!/bin/bash
 
-rm -rf backup
+OSName=""
 
-mkdir backup
-mv ~/.vimrc backup/vimrc.bak
+backup() {
+  rm -rf backup
+  mkdir backup
+  mv ~/.vimrc backup/vimrc.bak
+  mv ~/.profile backup/profile.bak
+  mv ~/.bashrc backup/bashrc.bak
+}
 
+promptOSChoice() {
+read -p "Choose OS (mac/windows) : " prompt
+  if [ $prompt == "mac" ] || [ $prompt == "windows" ]; then
+    OSName=$prompt
+  else
+    echo "Enter correct OS name (mac/linux)!"
+    promptOSChoice
+  fi
+}
+
+backup
+
+promptOSChoice
+
+echo "installing package manager..."
+if [ $OSName == "mac" ]; then
+  if [ ! -e /usr/local/Homebrew ]; then
+    echo "Installing Homebrew..."
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+fi
+
+echo "installing tmux..."
+if [ $OSName == "mac" ]; then
+  brew install tmux
+else
+  apt-get install tmux
+fi
+echo "Sourcing tmux.conf..."
+tmux source-file ../files/tmux.conf
+
+echo "Copying vimrc..."
 rm -rf ~/.vimrc
-cp ../files/vimrc ~/.vimrc
-
-cp ../files/gdbinit ~/.gdbinit
-
-rm -rf ~/.vim/colors
-rm -rf vim-monokai
+if [ $OSName == "mac" ]; then
+  cp ../files/vimrc_mac ~/.vimrc
+else
+  cp ../files/vimrc_linux ~/.vimrc
+fi
 
 echo "Copying profile..."
 cp ../files/profile ~/.profile
 source ~/.profile
 
-#echo "Copying bashrc..."
-#cp ../files/bashrc_debian ~/.bashrc
-#source ~/.bashrc
-
-echo "Sourcing tmux.conf..."
-tmux source-file ../files/tmux.conf
-
 echo "Installing vundle..."
 ./plugin-install.sh vundle
 
 echo "Installing monokai..."
+rm -rf ~/.vim/colors
+rm -rf vim-monokai
 ./plugin-install.sh monokai
 
 #echo "Installing ycm..."
