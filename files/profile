@@ -16,19 +16,6 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-if [ -f "$HOME/.bashrc" ]; then 
-    source "$HOME/.bashrc"
-fi
-
 if [ -f "$HOME/env/files/tmux.conf" ]; then
     tmux source-file "$HOME/env/files/tmux.conf"
 fi
-
-# set PATH so it includes user's private bin directories
-PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-
-if [ -f /home/kwanghyun/office/build/ccache/ccache.profile ]; then
-  source /home/kwanghyun/office/build/ccache/ccache.profile
-fi
-
-export PATH=$PATH:$HOME/office/script
