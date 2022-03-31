@@ -2,14 +2,6 @@
 
 OSName=""
 
-backup() {
-  rm -rf backup
-  mkdir backup
-  mv ~/.vimrc backup/vimrc.bak
-  mv ~/.profile backup/profile.bak
-  mv ~/.bashrc backup/bashrc.bak
-}
-
 promptOSChoice() {
 read -p "Choose OS (mac/windows) : " prompt
   if [ $prompt == "mac" ] || [ $prompt == "windows" ]; then
@@ -19,8 +11,6 @@ read -p "Choose OS (mac/windows) : " prompt
     promptOSChoice
   fi
 }
-
-backup
 
 promptOSChoice
 
@@ -49,9 +39,10 @@ else
   cp ../files/vimrc_linux ~/.vimrc
 fi
 
-echo "Copying profile..."
-cp ../files/profile ~/.profile
-source ~/.profile
+echo "Copying bash_profile..."
+rm -rf ~/.bash_profile
+if [ $OSName == "mac" ] || [ $OSName == "linux" ]; then
+  cp ../files/bash_profile ~/.bash_profile
 
 echo "Installing vundle..."
 ./plugin-install.sh vundle
@@ -60,8 +51,5 @@ echo "Installing monokai..."
 rm -rf ~/.vim/colors
 rm -rf vim-monokai
 ./plugin-install.sh monokai
-
-#echo "Installing ycm..."
-#./plugin-install.sh ycm
 
 echo "Done!"
