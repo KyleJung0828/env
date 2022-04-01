@@ -36,7 +36,6 @@ install_vundle() {
         echo "Plugin 'VundleVim/Vundle.vim'" >> ~/.vimrc
         echo "Plugin 'vim-airline/vim-airline'" >> ~/.vimrc
         echo "Plugin 'vim-airline/vim-airline-themes'" >> ~/.vimrc
-        echo "Bundle 'edkolev/tmuxline.vim'" >> ~/.vimrc
         echo "Plugin 'scrooloose/nerdtree'" >> ~/.vimrc
         echo "Plugin 'ctrlpvim/ctrlp.vim'" >> ~/.vimrc
         echo "Plugin 'octol/vim-cpp-enhanced-highlight'" >> ~/.vimrc

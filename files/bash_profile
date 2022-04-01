@@ -10,9 +10,5 @@ if [ -f "$HOME/env/files/tmux.conf" ]; then
     tmux source-file "$HOME/env/files/tmux.conf"
 fi
 
-alias serve="/opt/homebrew/opt/ruby@2.7/bin/bundle exec jekyll serve"
-alias bundle="/opt/homebrew/opt/ruby@2.7/bin/bundle"
 alias ocrt="ssh cdevgpu-ocr001.papago"
-
-export PATH="/opt/homebrew/opt/ruby@2.7/bin:$PATH"
 export PATH="$HOME/.poetry/bin:$PATH"
